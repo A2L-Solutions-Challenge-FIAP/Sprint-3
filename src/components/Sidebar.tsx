@@ -1,5 +1,6 @@
 
-import Header from './Header'
+import Header from './SidebarHeader'
+
 
 
 const Sidebar = () => {
@@ -7,6 +8,7 @@ const Sidebar = () => {
   return (
     <nav className="shadow-md h-screen w-50 ">
       <Header />
+      
   </nav>
   )
 }
