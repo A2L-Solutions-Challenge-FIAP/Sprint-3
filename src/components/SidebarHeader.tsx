@@ -23,7 +23,7 @@ const SidebarHeader = ({ open, setOpen }: SidebarHeaderProps) => {
         className="text-gray-600 focus:outline-none w-8 h-8 flex items-center justify-center"
       >
         {open ? (
-          <img src={menu_close} alt="Fechar menu" className="w-6 h-6 cursor-pointer" />
+          <img src={menu_close} alt="Fechar menu" className="w-8 h-8 cursor-pointer" />
         ) : (
           <img src={menu_open} alt="Abrir menu" className="w-8 h-8 cursor-pointer" />
         )}

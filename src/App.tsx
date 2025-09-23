@@ -14,10 +14,7 @@ import "./index.css";
 function App() {
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar fixo */}
       <Sidebar />
-
-      {/* Área principal que muda conforme a rota */}
       <main className="flex-1 p-6">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,7 +25,6 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/sac" element={<Sac />} />
           <Route path="/faq" element={<Faq />} />
-          {/* rota inválida redireciona pra Home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
