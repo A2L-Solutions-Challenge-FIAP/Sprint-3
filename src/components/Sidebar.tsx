@@ -1,9 +1,12 @@
 
+import Header from './Header'
+
 
 const Sidebar = () => {
   
   return (
-    <nav className="shadow-md h-screen w-60 bg-green-200 ">
+    <nav className="shadow-md h-screen w-50 ">
+      <Header />
   </nav>
   )
 }
