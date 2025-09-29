@@ -14,8 +14,7 @@ const schema = z.object({
     .min(10, "O email deve ter pelo menos 10 caracteres"),
   name: z
     .string()
-    .min(2, "O nome deve conter pelo menos 2 caracteres")
-    .optional(),
+    .min(2, "O nome deve conter pelo menos 2 caracteres"),
   message: z
     .string()
     .min(10, "A mensagem deve conter pelo menos 10 caracteres")
@@ -42,7 +41,7 @@ const Sac = ({ buttonText }: Props) => {
     );
 
     console.log("fim do submit");
-    reset(); // limpa o formulário após envio
+    reset(); 
   }
 
   return (
@@ -50,9 +49,10 @@ const Sac = ({ buttonText }: Props) => {
       <h2 className="text-3xl font-extrabold text-center mb-6 bg-gradient-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent">
         Fale Conosco
       </h2>
+      
 
       <form onSubmit={handleSubmit(enviarFormulario)} className="space-y-6">
-        {/* Nome */}
+       
         <div>
           <label className="block font-semibold text-gray-700 mb-2">Nome</label>
           <input
@@ -69,7 +69,7 @@ const Sac = ({ buttonText }: Props) => {
           )}
         </div>
 
-        {/* Email */}
+       
         <div>
           <label className="block font-semibold text-gray-700 mb-2">Email</label>
           <input
@@ -86,7 +86,7 @@ const Sac = ({ buttonText }: Props) => {
           )}
         </div>
 
-        {/* Mensagem */}
+        
         <div>
           <label className="block font-semibold text-gray-700 mb-2">
             Mensagem
@@ -106,7 +106,6 @@ const Sac = ({ buttonText }: Props) => {
           )}
         </div>
 
-        {/* Botões */}
         <div className="flex flex-col md:flex-row justify-end gap-4 pt-4">
           <button
             type="button"
@@ -119,7 +118,7 @@ const Sac = ({ buttonText }: Props) => {
             type="submit"
             disabled={isSubmitting}
             className="bg-gradient-to-r from-purple-600 to-orange-500 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:opacity-90 transition disabled:opacity-50"
-          >
+          > Enviar
             {isSubmitting ? "Enviando..." : buttonText}
           </button>
         </div>
