@@ -3,6 +3,16 @@ import { useState } from "react";
 
 
 
+export default function Faq() {
+const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+
+const toggleQuestion = (index: number) => {
+setOpenIndex(openIndex === index ? null : index);
+};
+
+
+
 const perguntas = [
 {
 pergunta: "PARA QUE SERVE O DASHBOARD DE LEMBRETES?",
@@ -42,45 +52,43 @@ resposta:
 ];
 
 
-export default function Faq() {
-const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  return (
+    <main className="max-w-5xl mx-auto mt-12 p-6">
+      <h2 className="text-4xl font-extrabold text-center mb-10  text-blue-900  bg-clip-text">
+        Perguntas Frequentes
+      </h2>
 
-const toggleQuestion = (index: number) => {
-setOpenIndex(openIndex === index ? null : index);
-};
+      <div className="flex flex-col gap-6">
+        {perguntas.map((item, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+          >
+            <button
+              onClick={() => toggleQuestion(index)}
+              className="w-full text-left text-lg font-semibold text-purple-900 flex justify-between items-center"
+            >
+              <span>{item.pergunta}</span>
+              <div
+                className={`h-5 w-5 transform transition-transform duration-300 ${
+                  openIndex === index ? "rotate-180 text-orange-600" : "rotate-0"
+                }`}
+              />
+            </button>
 
-
-return (
-<main className="max-w-5xl mx-auto mt-12 p-6">
-<h2 className="text-4xl font-bold text-purple-800 text-center mb-8">
-Perguntas Frequentes
-</h2>
-
-
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-{perguntas.map((item, index) => (
-<div
-key={index}
-className="bg-white rounded-lg shadow-md p-4 transition-all border border-gray-200"
->
-<button
-onClick={() => toggleQuestion(index)}
-className="w-full text-left text-lg font-semibold bg-purple-800 text-white rounded-md px-4 py-3 hover:bg-orange-600 flex justify-between items-center"
->
-{item.pergunta}
-
-</button>
-
-
-{openIndex === index && (
-<div className="mt-3 p-3 bg-gray-50 text-gray-700 rounded-md text-sm leading-relaxed">
-{item.resposta}
-</div>
-)}
-</div>
-))}
-</div>
-</main>
-);
+            <div
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                openIndex === index ? "max-h-screen mt-3" : "max-h-0"
+              }`}
+            >
+              <p className="text-gray-700 bg-gray-50 rounded-md p-4 text-sm leading-relaxed whitespace-pre-line">
+                {item.resposta}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
 }

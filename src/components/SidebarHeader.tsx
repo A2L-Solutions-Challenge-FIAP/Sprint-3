@@ -9,12 +9,12 @@ interface SidebarHeaderProps {
 
 const SidebarHeader = ({ open, setOpen }: SidebarHeaderProps) => {
   return (
-    <div className="border border-gray-200 px-3 py-2 h-16 flex justify-between items-center">
+    <div className="  px-3 py-2 h-16 flex justify-between items-center">
       <div>
         <img
           src={logo_imrea_min}
           alt="Logo"
-          className={`${open ? "w-10 opacity-100" : "w-0 opacity-0"} bg-white rounded-b-full transition-all duration-300`}
+          className={`${open ? "w-10 opacity-100" : "w-0 opacity-0"}  rounded-b-full transition-all duration-300`}
         />
       </div>
       <div>

@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`shadow-md bg-blue-100 h-screen flex flex-col duration-500 
+      className={`shadow-md bg-gradient-to-b to-blue-500 text-white min-h-screen flex flex-col duration-500 
       ${open ? "w-56" : "w-20"} p-4 justify-between `}
     >
       
