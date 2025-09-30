@@ -40,11 +40,11 @@ export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
           >
             <img src={item.icon} alt={item.label} className="w-6 h-6 min-w-[1.5rem]" />
             
-           <span
+            <span
               className={`text-sm  ${
                 open ? "opacity-100 ml-1" : "opacity-0  w-0 overflow-hidden translate-x-24"
               } duration-200`}
-            >
+              >
               {item.label}
             </span>
           </NavLink>
