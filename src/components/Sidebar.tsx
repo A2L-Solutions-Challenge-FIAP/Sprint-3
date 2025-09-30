@@ -1,11 +1,17 @@
 import SidebarHeader from "./SidebarHeader";
 import SidebarItems from "./SidebarItems";
 import SidebarFooter from "./SidebarFooter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; 
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
+  const location = useLocation();
+
+   useEffect(() => {
+    setOpen(false);
+  }, [location]);
 
   return (
     <>

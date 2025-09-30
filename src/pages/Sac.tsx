@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useState } from "react";
 
 interface Props {
   buttonText?: string;
@@ -25,22 +26,24 @@ const Sac = ({ buttonText }: Props) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting},
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
-  async function enviarFormulario(data: FormData) {
-    console.log("formulário enviado!", data);
+  const [messageSucessful, setMessageSucessful] = useState(false);
 
-    await new Promise((resolve) =>
-      setTimeout(() => resolve("some value"), 3_000)
-    );
+async function enviarFormulario(data: FormData) {
+  console.log("formulário enviado!", data);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  
+  setMessageSucessful(true);     
+  reset();                       
 
-    console.log("fim do submit");
-    reset();
-  }
-
+  setTimeout(() => {
+    setMessageSucessful(false);  
+  }, 5000);
+}
   return (
     <section className="max-w-2xl mx-auto mt-12 p-8 bg-white shadow-lg rounded-2xl border border-gray-100">
       <h2 className="text-3xl font-extrabold text-center mb-6  bg-clip-text text-blue-900">
@@ -109,6 +112,7 @@ const Sac = ({ buttonText }: Props) => {
           >
             Limpar
           </button>
+
           <button
             type="submit"
             disabled={isSubmitting}
@@ -117,6 +121,11 @@ const Sac = ({ buttonText }: Props) => {
             {isSubmitting ? "Enviando..." : buttonText ?? "Enviar"}
           </button>
         </div>
+        {messageSucessful && (
+          <p className="text-green-600 text-sm">
+            Formulário enviado com sucesso!
+          </p>
+        )}
       </form>
     </section>
   );
