@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../components/Button";
 
 type Lembrete = {
   id: string;
@@ -109,19 +110,18 @@ export default function Dashboard() {
               />
             </div>
             <div className="flex gap-2">
-              <button className="px-3 py-2 rounded-lg border border-transparent bg-slate-900 text-white">
+              <Button variant= "primary">
                 Adicionar
-              </button>
-              <button
+              </Button>
+              <Button variant="secondary"
                 type="button"
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-slate-100 text-slate-900"
                 onClick={() => {
                   setTitulo("");
                   setQuando(agoraMais1h());
                 }}
               >
                 Limpar
-              </button>
+              </Button>
             </div>
           </form>
         </section>
@@ -149,18 +149,18 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <div className="flex gap-2 flex-wrap">
-                    <button
-                      className="px-3 py-2 rounded-lg border border-gray-200 bg-slate-100 text-slate-900 text-sm"
+                    <Button variant="secondary"
+                      className="px-3 py-2 rounded-lg border border-gray-200  text-slate-900 text-sm"
                       onClick={() => alternarEnviado(l.id)}
                     >
                       {l.enviado ? "Voltar p/ pendente" : "Marcar enviado"}
-                    </button>
-                    <button
-                      className="px-3 py-2 rounded-lg border border-red-200 bg-red-100 text-red-700 text-sm"
+                    </Button>
+                    <Button variant="danger"
+                      className="px-3 py-2 "
                       onClick={() => excluir(l.id)}
                     >
                       Excluir
-                    </button>
+                    </Button>
                   </div>
                 </li>
               ))}

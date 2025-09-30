@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState } from "react";
+import Button from "../components/Button";
 
 interface Props {
   buttonText?: string;
@@ -105,21 +106,21 @@ async function enviarFormulario(data: FormData) {
         </div>
 
         <div className="flex flex-col md:flex-row justify-end gap-4 pt-4">
-          <button
+          <Button variant="secondary"
             type="button"
             onClick={() => reset()}
-            className="bg-gray-200 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-300 transition"
+            className="px-5 py-2 "
           >
             Limpar
-          </button>
+          </Button>
 
-          <button
+          <Button variant="primary"
             type="submit"
             disabled={isSubmitting}
-            className="bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:opacity-90 transition disabled:opacity-50"
+            className="px-5 py-2 rounded-lg text-white"
           >
             {isSubmitting ? "Enviando..." : buttonText ?? "Enviar"}
-          </button>
+          </Button>
         </div>
         {messageSucessful && (
           <p className="text-green-600 text-sm">

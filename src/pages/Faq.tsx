@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
