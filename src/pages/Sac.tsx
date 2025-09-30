@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 interface Props {
-  buttonText: string;
+  buttonText?: string;
 }
 
-// Schema com Zod
+
 const schema = z.object({
   email: z
     .string()
@@ -52,7 +52,6 @@ const Sac = ({ buttonText }: Props) => {
       
 
       <form onSubmit={handleSubmit(enviarFormulario)} className="space-y-6">
-       
         <div>
           <label className="block font-semibold text-gray-700 mb-2">Nome</label>
           <input
@@ -69,7 +68,6 @@ const Sac = ({ buttonText }: Props) => {
           )}
         </div>
 
-       
         <div>
           <label className="block font-semibold text-gray-700 mb-2">Email</label>
           <input
@@ -117,9 +115,9 @@ const Sac = ({ buttonText }: Props) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-gradient-to-r from-purple-600 to-orange-500 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:opacity-90 transition disabled:opacity-50"
-          > Enviar
-            {isSubmitting ? "Enviando..." : buttonText}
+            className="bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:opacity-90 transition disabled:opacity-50"
+          > 
+            {isSubmitting ? "Enviando..." : buttonText ?? "Enviar"}
           </button>
         </div>
       </form>

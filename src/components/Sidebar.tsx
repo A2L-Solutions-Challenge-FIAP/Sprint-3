@@ -24,7 +24,6 @@ const Sidebar = () => {
           ${open ? "fixed top-0 left-0 w-full h-full p-6 z-40" : "hidden"}
           md:relative md:flex md:flex-col md:h-auto md:p-4 
           ${desktopOpen ? "md:w-56" : "md:w-20"}
-        
         `}
       >
         <div className="hidden md:block">
@@ -32,7 +31,7 @@ const Sidebar = () => {
         </div>
 
         <div className = {`flex-1 ${open ? "block" : "hidden"} md:block md:text `}> 
-        <SidebarItems open={open || desktopOpen} />
+        <SidebarItems open={open || desktopOpen} onItemClick={() =>{ setOpen(false); setDesktopOpen(false);} }/>
         </div> 
 
         <div className={`${open ? "flex": "hidden"} md:flex items-center gap-3 mt-auto`}>

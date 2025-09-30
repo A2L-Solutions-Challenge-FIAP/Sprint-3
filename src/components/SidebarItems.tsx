@@ -10,6 +10,7 @@ import faq from "../assets/faq.svg";
 
 interface SidebarItemsProps {
   open: boolean;
+  onItemClick?: () => void;
 }
 
 const menuItems = [
@@ -24,13 +25,14 @@ const menuItems = [
 
 
 
-export default function SidebarItems({ open }: SidebarItemsProps) {
+export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
   return (
     <ul className="flex-1" >
             {menuItems.map((item, index) => (
         <li key={index}>
           <NavLink
             to={item.path}
+            onClick={onItemClick}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2 rounded-md duration-200 cursor-pointer my-2
               ${isActive ? "bg-blue-400 text-white" : "hover:bg-blue-200 duration-300 cursor-pointer text-gray-700 "}`
