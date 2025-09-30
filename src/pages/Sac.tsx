@@ -46,7 +46,7 @@ const Sac = ({ buttonText }: Props) => {
 
   return (
     <section className="max-w-2xl mx-auto mt-12 p-8 bg-white shadow-lg rounded-2xl border border-gray-100">
-      <h2 className="text-3xl font-extrabold text-center mb-6 bg-gradient-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent">
+      <h2 className="text-3xl font-extrabold text-center mb-6  bg-clip-text text-blue-900">
         Fale Conosco
       </h2>
       
