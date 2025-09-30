@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 
 interface SidebarFooterProps {
   open: boolean;
+  onItemClick?: () => void;
 }
 
-const SidebarFooter = ({ open }: SidebarFooterProps) => {
+const SidebarFooter = ({ open, onItemClick }: SidebarFooterProps) => {
   return (
     <div
       className={`flex items-center gap-2 w-full mb-2
     ${open ? "justify-start" : "justify-center"}`}
     >
-      <Link to="/Logs">
+      <Link to="/Logs"
+      onClick={onItemClick}>
         <img
           src={log_user}
           alt="User"

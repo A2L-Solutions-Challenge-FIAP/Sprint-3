@@ -35,7 +35,7 @@ const Sidebar = () => {
         </div> 
 
         <div className={`${open ? "flex": "hidden"} md:flex items-center gap-3 mt-auto`}>
-          <SidebarFooter open={open || desktopOpen} />
+          <SidebarFooter open={open || desktopOpen} onItemClick={() =>{ setOpen(false); setDesktopOpen(false);} } />
         </div>
       </nav>
     </>
