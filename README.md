@@ -91,7 +91,7 @@ git clone https://github.com/A2L-Solutions-Challenge-FIAP/Sprint-4.git
 ### 2. Navegue até o diretório do projeto
 ```bash
 
-cd Sprint-4
+cd Sprint-3
 
 ```
 
