@@ -6,6 +6,7 @@ Este repositório dá continuidade ao desenvolvimento da solução proposta nas 
 Nesta nova etapa, o foco está na construção de um **sistema web de lembretes de consultas**, pensado especialmente para **auxiliar os funcionários do IMREA na gestão e envio de lembretes aos pacientes**. O objetivo é tornar o processo mais **eficiente, organizado e acessível**, reduzindo faltas e facilitando o acompanhamento dos atendimentos já agendados.
 
 A interface do sistema foi desenvolvida com foco em **usabilidade, clareza e responsividade**, garantindo que os usuários internos possam visualizar, criar, editar e acompanhar o status dos lembretes com facilidade e agilidade.
+
 ---
 
 ## 🚀 Tecnologias Utilizadas
@@ -136,7 +137,8 @@ npm install -D @types/react @types/react-dom
 npm run dev 
 
 ```
-acesse pelo navegador o link que aparecerá como este http://localhost:5173/
+- acesse pelo navegador o link que aparecerá como este http://localhost:5173/
+
 ---
 
 ## 🔗 Links Importantes
