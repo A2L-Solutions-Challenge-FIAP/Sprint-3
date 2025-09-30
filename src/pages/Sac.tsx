@@ -6,15 +6,12 @@ interface Props {
   buttonText?: string;
 }
 
-
 const schema = z.object({
   email: z
     .string()
     .email("Formato inválido")
     .min(10, "O email deve ter pelo menos 10 caracteres"),
-  name: z
-    .string()
-    .min(2, "O nome deve conter pelo menos 2 caracteres"),
+  name: z.string().min(2, "O nome deve conter pelo menos 2 caracteres"),
   message: z
     .string()
     .min(10, "A mensagem deve conter pelo menos 10 caracteres")
@@ -41,7 +38,7 @@ const Sac = ({ buttonText }: Props) => {
     );
 
     console.log("fim do submit");
-    reset(); 
+    reset();
   }
 
   return (
@@ -49,7 +46,6 @@ const Sac = ({ buttonText }: Props) => {
       <h2 className="text-3xl font-extrabold text-center mb-6  bg-clip-text text-blue-900">
         Fale Conosco
       </h2>
-      
 
       <form onSubmit={handleSubmit(enviarFormulario)} className="space-y-6">
         <div>
@@ -69,7 +65,9 @@ const Sac = ({ buttonText }: Props) => {
         </div>
 
         <div>
-          <label className="block font-semibold text-gray-700 mb-2">Email</label>
+          <label className="block font-semibold text-gray-700 mb-2">
+            Email
+          </label>
           <input
             type="email"
             {...register("email")}
@@ -84,7 +82,6 @@ const Sac = ({ buttonText }: Props) => {
           )}
         </div>
 
-        
         <div>
           <label className="block font-semibold text-gray-700 mb-2">
             Mensagem
@@ -116,7 +113,7 @@ const Sac = ({ buttonText }: Props) => {
             type="submit"
             disabled={isSubmitting}
             className="bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:opacity-90 transition disabled:opacity-50"
-          > 
+          >
             {isSubmitting ? "Enviando..." : buttonText ?? "Enviar"}
           </button>
         </div>

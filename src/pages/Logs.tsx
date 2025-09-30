@@ -1,9 +1,5 @@
-
-
 const Logs = () => {
-  return (
-    <div>Logs</div>
-  )
-}
+  return <div>Logs</div>;
+};
 
-export default Logs
+export default Logs;

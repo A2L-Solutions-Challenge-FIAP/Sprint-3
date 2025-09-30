@@ -42,7 +42,6 @@ const Developers = () => {
                 {dev.turma}
               </p>
 
-              {/* Links */}
               <div className="flex justify-center sm:justify-start gap-4 mt-4">
 
                 <a
@@ -63,7 +62,7 @@ const Developers = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-gray-800 hover:text-black transition"
                 >
-                   <img
+                  <img
               src={github}
               alt="GitHub"
               className="w-8 h-8 hover:opacity-80 transition"
