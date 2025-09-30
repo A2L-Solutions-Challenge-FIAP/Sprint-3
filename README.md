@@ -1,7 +1,11 @@
 # 📌 Projeto Sistema de Lembretes de Consultas
 
-Sistema de lembretes para consultas médicas, com foco em acessibilidade, clareza e responsividade. Permite o envio e gerenciamento de lembretes baseados em dados de consultas já cadastradas, promovendo organização e redução de faltas.
 
+Este repositório dá continuidade ao desenvolvimento da solução proposta nas sprints anteriores, voltada à melhoria do processo de teleconsulta no IMREA – Instituto de Medicina Física e Reabilitação do Hospital das Clínicas.
+
+Nesta nova etapa, o foco está na construção de um **sistema web de lembretes de consultas**, pensado especialmente para **auxiliar os funcionários do IMREA na gestão e envio de lembretes aos pacientes**. O objetivo é tornar o processo mais **eficiente, organizado e acessível**, reduzindo faltas e facilitando o acompanhamento dos atendimentos já agendados.
+
+A interface do sistema foi desenvolvida com foco em **usabilidade, clareza e responsividade**, garantindo que os usuários internos possam visualizar, criar, editar e acompanhar o status dos lembretes com facilidade e agilidade.
 ---
 
 ## 🚀 Tecnologias Utilizadas
@@ -99,26 +103,26 @@ npm install
 
 Se necessário, instale também:
 
-# Bibliotecas para validação de formulários
+**Bibliotecas para validação de formulários**
 ```bash
 
 npm install react-hook-form zod @hookform/resolvers
 
 ```
 
-# Roteamento
+**Roteamento**
 ```bash
 npm install react-router-dom
 ```
 
-# Tailwind CSS e plugins
+**Tailwind CSS e plugins**
 ```bash
 
 npm install -D tailwindcss @tailwindcss/forms
 
 ```
 
-# Tipagens (em caso de erro com TypeScript)
+**Tipagens (em caso de erro com TypeScript)**
 ```bash
 
 npm install -D @types/react @types/react-dom
