@@ -84,7 +84,7 @@ src/
 
 ```bash
 
-git clone https://github.com/A2L-Solutions-Challenge-FIAP/Sprint-4.git
+git clone https://github.com/A2L-Solutions-Challenge-FIAP/Sprint-3.git
 
 ```
 
