@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
+import type { Lembrete } from "../types";
 
-type Lembrete = {
-  id: string;
-  titulo: string;
-  quando: string;
-  enviado: boolean;
-};
+
 
 const uid = () => Math.random().toString(36).slice(2, 9);
 const agoraMais1h = () =>

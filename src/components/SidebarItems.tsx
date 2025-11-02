@@ -35,7 +35,7 @@ export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
             to={item.path}
             onClick={onItemClick}
             className={({ isActive }) =>
-              `group flex items-center gap-3 px-3 py-2 rounded-md duration-200 cursor-pointer my-2 font-bold
+              `group flex items-center gap-3 px-3 py-2 rounded-md duration-200 cursor-pointer my-2 
               ${isActive ? "bg-blue-500! text-white " : "hover:bg-blue-400 duration-300 cursor-pointer text-inherit"}`
             }
           >
