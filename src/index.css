@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+
+@theme {
+
+  --color-blue-energy: rgb(60, 140, 230);
+  --color-blue-light: rgb(173, 216, 230);
+
+}

@@ -4,6 +4,7 @@ import developers from "../assets/developers.svg";
 import dashboard from "../assets/dashboard.svg";
 import settings from "../assets/settings.svg";
 import analytics from "../assets/analytics.svg";
+import arrow from "../assets/arrow.svg";
 import sac from "../assets/sac.svg";
 import faq from "../assets/faq.svg";
 
@@ -34,8 +35,8 @@ export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
             to={item.path}
             onClick={onItemClick}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-md duration-200 cursor-pointer my-2 
-              ${isActive ? "bg-blue-400 text-white" : "hover:bg-blue-200 duration-300 cursor-pointer text-gray-700 "}`
+              `group flex items-center gap-3 px-3 py-2 rounded-md duration-200 cursor-pointer my-2 font-bold
+              ${isActive ? "bg-blue-500! text-white " : "hover:bg-blue-400 duration-300 cursor-pointer text-inherit"}`
             }
           >
             <img src={item.icon} alt={item.label} className="w-6 h-6 min-w-[1.5rem]" />
@@ -47,6 +48,13 @@ export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
               >
               {item.label}
             </span>
+            
+              <img
+                src={arrow}
+                alt="seta"
+                className="ml-auto w-4 h-4 opacity-0 translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0"
+              />
+      
           </NavLink>
         </li>
       ))}

@@ -27,8 +27,8 @@ const SidebarFooter = ({ open, onItemClick }: SidebarFooterProps) => {
           overflow-hidden
           ${open ? "opacity-100 w-auto" : "opacity-0 w-0"}`}
         >
-          <p className="text-sm  text-black font-medium">Ana Freitas</p>
-          <span className="text-xs text-black">ana_freitas@fiap.com.br</span>
+          <p className="text-sm text-inherit font-medium">Ana Freitas</p>
+          <span className="text-xs text-inherit">ana_freitas@fiap.com.br</span>
         </div>
       )}
     </div>
