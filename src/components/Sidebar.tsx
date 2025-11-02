@@ -29,7 +29,7 @@ const Sidebar = () => {
           fixed top-0 left-0 h-full bg-blue-energy text-white flex flex-col duration-300
           ${open ? "  fixed top-0 left-0 w-full h-full p-6 z-40 " : "hidden"}
           md:relative md:flex md:flex-col md:h-auto md:p-4 
-          ${desktopOpen ? "md:w-56" : "md:w-20"}
+          ${desktopOpen ? "md:w-70" : "md:w-20"}
         `}
       >
         <div className="hidden md:block">
