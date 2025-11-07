@@ -1,173 +1,156 @@
-import React, { useState } from "react";
-import Button from "../components/Button";
-import type { Lembrete } from "../types";
 
 
+interface Consulta {
+  id: number;
+  paciente: string;
+  especialidade: string;
+  data: string;
+  status: "Agendada" | "Realizada" | "Não compareceu";
+}
 
-const uid = () => Math.random().toString(36).slice(2, 9);
-const agoraMais1h = () =>
-  new Date(Date.now() + 60 * 60 * 1000).toISOString().slice(0, 16);
-
-function seed(): Lembrete[] {
-  const base = new Date();
-  return [
-    {
-      id: uid(),
-      titulo: "Confirmar teleconsulta",
-      quando: new Date(+base + 2 * 60 * 60 * 1000).toISOString(),
-      enviado: false,
-    },
-    {
-      id: uid(),
-      titulo: "Enviar pesquisa de satisfação",
-      quando: new Date(+base + 24 * 60 * 60 * 1000).toISOString(),
-      enviado: false,
-    },
-  ];
+interface Notificacao {
+  id: number;
+  titulo: string;
+  dataEnvio: string;
+  status: "Pendente" | "Enviada";
 }
 
 export default function Dashboard() {
-  const [lembretes, setLembretes] = useState<Lembrete[]>(seed());
-  const [titulo, setTitulo] = useState("");
-  const [quando, setQuando] = useState(agoraMais1h());
+  const consultasMock: Consulta[] = [
+    { id: 1, paciente: "Maria Oliveira", especialidade: "Psiquiatria", data: "2025-11-08T10:00", status: "Agendada" },
+    { id: 2, paciente: "Anderson Costa", especialidade: "Neurologia", data: "2025-11-05T14:00", status: "Realizada" },
+    { id: 3, paciente: "José Carlos", especialidade: "Fisiatria", data: "2025-11-06T09:00", status: "Não compareceu" },
+  ];
 
-  function adicionar(e: React.FormEvent) {
-    e.preventDefault();
-    if (!titulo.trim()) return;
-    const novo: Lembrete = {
-      id: uid(),
-      titulo: titulo.trim(),
-      quando: new Date(quando).toISOString(),
-      enviado: false,
-    };
-    setLembretes((prev) => [novo, ...prev]);
-    setTitulo("");
-    setQuando(agoraMais1h());
-  }
+  const notificacoesMock: Notificacao[] = [
+    { id: 1, titulo: "Lembrete de consulta – Maria Oliveira", dataEnvio: "2025-11-07T09:00", status: "Enviada" },
+    { id: 2, titulo: "Lembrete de pesquisa de satisfação", dataEnvio: "2025-11-07T13:00", status: "Pendente" },
+  ];
 
-  function alternarEnviado(id: string) {
-    setLembretes((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, enviado: !l.enviado } : l))
-    );
-  }
+  const consultasAgendadas = consultasMock.filter((c) => c.status === "Agendada").length;
+  const consultasRealizadas = consultasMock.filter((c) => c.status === "Realizada").length;
+  const consultasFaltas = consultasMock.filter((c) => c.status === "Não compareceu").length;
 
-  function excluir(id: string) {
-    setLembretes((prev) => prev.filter((l) => l.id !== id));
-  }
-
-  const ordenados = [...lembretes].sort(
-    (a, b) => +new Date(a.quando) - +new Date(b.quando)
-  );
-
-  const total = lembretes.length;
-  const pendentes = lembretes.filter((l) => !l.enviado).length;
+  const notificacoesEnviadas = notificacoesMock.filter((n) => n.status === "Enviada").length;
+  const notificacoesPendentes = notificacoesMock.filter((n) => n.status === "Pendente").length;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      
-      <header className="sticky top-0 bg-white border-b border-gray-200">
-        <div className="max-w-3xl mx-auto p-4 flex items-center gap-3">
-          <h1 className="text-xl  text-blue-900 font-bold">Sistema de lembretes</h1>
-          <div className="ml-auto text-xs">
-            <span>
-              Total: {total} • Pendentes: {pendentes}
-            </span>
-          </div>
-        </div>
+    <div className="p-8 bg-gray-50 min-h-screen">
+
+      <header className="mb-10">
+        <h1 className="text-3xl font-bold text-blue-900 mb-2">Visão Geral</h1>
+        <p className="text-gray-500 text-sm">
+          Acompanhe o resumo de consultas e notificações do sistema
+        </p>
       </header>
 
-      
-      <main className="max-w-3xl mx-auto p-4 grid gap-4">
-      
-        <section className="bg-white border border-gray-200 rounded-xl p-4">
-          <h2 className="font-semibold mb-3">Novo lembrete</h2>
-          <form onSubmit={adicionar} className="grid gap-3">
-            <div>
-              <label className="block mb-1 text-xs text-slate-600">
-                Título *
-              </label>
-              <input
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                value={titulo}
-                onChange={(e) => setTitulo(e.target.value)}
-                placeholder="Ex.: Confirmar teleconsulta"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-xs text-slate-600">
-                Data e hora
-              </label>
-              <input
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                type="datetime-local"
-                value={quando}
-                onChange={(e) => setQuando(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-2">
-              <Button variant= "primary">
-                Adicionar
-              </Button>
-              <Button variant="secondary"
-                type="button"
-                onClick={() => {
-                  setTitulo("");
-                  setQuando(agoraMais1h());
-                }}
-              >
-                Limpar
-              </Button>
-            </div>
-          </form>
-        </section>
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Consultas agendadas</h3>
+          <p className="text-3xl font-bold text-blue-700 mt-1">{consultasAgendadas}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Consultas realizadas</h3>
+          <p className="text-3xl font-bold text-green-700 mt-1">{consultasRealizadas}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Faltas</h3>
+          <p className="text-3xl font-bold text-red-700 mt-1">{consultasFaltas}</p>
+        </div>
+      </section>
 
-        
-        <section className="bg-white border border-gray-200 rounded-xl p-4">
-          <h2 className="font-semibold mb-3">Lembretes</h2>
-          {ordenados.length === 0 ? (
-            <p className="text-sm text-slate-500">Nenhum lembrete por aqui.</p>
-          ) : (
-            <ul className="list-none p-0 m-0 grid gap-2">
-              {ordenados.map((l) => (
-                <li
-                  key={l.id}
-                  className="border border-gray-200 rounded-lg p-3 grid gap-1.5"
-                >
-                  <div className="flex items-center gap-2">
-                    <strong
-                      className={l.enviado ? "line-through" : ""}
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Notificações enviadas</h3>
+          <p className="text-3xl font-bold text-green-700 mt-1">{notificacoesEnviadas}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Notificações pendentes</h3>
+          <p className="text-3xl font-bold text-blue-700 mt-1">{notificacoesPendentes}</p>
+        </div>
+      </section>
+
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-blue-900 mb-4">Consultas Recentes</h2>
+          <table className="min-w-full text-sm">
+            <thead className="bg-blue-50 text-blue-900 uppercase text-xs tracking-wider">
+              <tr>
+                <th className="px-3 py-2 text-left">Paciente</th>
+                <th className="px-3 py-2 text-left">Especialidade</th>
+                <th className="px-3 py-2 text-left">Data</th>
+                <th className="px-3 py-2 text-left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {consultasMock.map((c) => (
+                <tr key={c.id} className="border-t border-gray-100 hover:bg-blue-50/40">
+                  <td className="px-3 py-2 font-medium text-gray-800">{c.paciente}</td>
+                  <td className="px-3 py-2 text-gray-600">{c.especialidade}</td>
+                  <td className="px-3 py-2 text-gray-600">
+                    {new Date(c.data).toLocaleString("pt-BR", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    })}
+                  </td>
+                  <td className="px-3 py-2">
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full font-medium ${
+                        c.status === "Realizada"
+                          ? "bg-green-100 text-green-700"
+                          : c.status === "Não compareceu"
+                          ? "bg-red-100 text-red-700"
+                          : "bg-blue-100 text-blue-700"
+                      }`}
                     >
-                      {l.titulo}
-                    </strong>
-                    <span className="ml-auto text-xs text-slate-600">
-                      {new Date(l.quando).toLocaleString()}
+                      {c.status}
                     </span>
-                  </div>
-                  <div className="flex gap-2 flex-wrap">
-                    <Button variant="secondary"
-                      className="px-3 py-2 rounded-lg border border-gray-200  text-slate-900 text-sm"
-                      onClick={() => alternarEnviado(l.id)}
-                    >
-                      {l.enviado ? "Voltar p/ pendente" : "Marcar enviado"}
-                    </Button>
-                    <Button variant="danger"
-                      className="px-3 py-2 "
-                      onClick={() => excluir(l.id)}
-                    >
-                      Excluir
-                    </Button>
-                  </div>
-                </li>
+                  </td>
+                </tr>
               ))}
-            </ul>
-          )}
-        </section>
-      </main>
+            </tbody>
+          </table>
+        </div>
 
-      <footer className="text-center text-xs text-slate-500 py-4">
-          
-      </footer>
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-blue-900 mb-4">Últimas Notificações</h2>
+          <table className="min-w-full text-sm">
+            <thead className="bg-blue-50 text-blue-900 uppercase text-xs tracking-wider">
+              <tr>
+                <th className="px-3 py-2 text-left">Título</th>
+                <th className="px-3 py-2 text-left">Data</th>
+                <th className="px-3 py-2 text-left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notificacoesMock.map((n) => (
+                <tr key={n.id} className="border-t border-gray-100 hover:bg-blue-50/40">
+                  <td className="px-3 py-2 font-medium text-gray-800">{n.titulo}</td>
+                  <td className="px-3 py-2 text-gray-600">
+                    {new Date(n.dataEnvio).toLocaleString("pt-BR", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    })}
+                  </td>
+                  <td className="px-3 py-2">
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full font-medium ${
+                        n.status === "Enviada"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-blue-100 text-blue-700"
+                      }`}
+                    >
+                      {n.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

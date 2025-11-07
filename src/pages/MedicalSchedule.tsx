@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 
 interface Consulta {
   id: number;
@@ -10,6 +10,7 @@ interface Consulta {
 }
 
 export default function MedicalSchedule() {
+  const [search, setSearch] = useState("");
   const consultas: Consulta[] = [
     {
       id: 1,
@@ -41,10 +42,19 @@ export default function MedicalSchedule() {
     <div className="p-8 bg-gray-50 min-h-screen">
 
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-        <h1 className="text-3xl font-bold text-blue-900">Agenda Médica</h1>
-        <button className="mt-4 sm:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">
-          + Nova Consulta
-        </button>
+        <h1 className="text-3xl font-bold text-blue-900">Consultas</h1>
+        <div className="flex flex-col sm:flex-row gap-3 items-center w-full sm:w-auto">
+
+          <input
+            type="text"
+            placeholder="Buscar por paciente ou especialidade..."
+            className="w-full sm:w-80 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+        </div>
+    
       </header>
 
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
