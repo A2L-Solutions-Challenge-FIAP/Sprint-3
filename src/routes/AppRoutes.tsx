@@ -5,6 +5,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import Developers from "../pages/Developers";
+import About from "../pages/About";
 import MedicalSchedule from "../pages/MedicalSchedule";
 import Notification from "../pages/Notification";
 import History from "../pages/History";
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     element: <PublicLayout />,
     children: [
       { path: "/", element: <Home /> },
+      { path:"about", element: <About/>},
       { path: "developers", element: <Developers /> },
       { path: "faq", element: <Faq /> },
       { path: "sac", element: <Sac /> },

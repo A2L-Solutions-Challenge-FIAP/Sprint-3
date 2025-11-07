@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 
 export default function Faq() {
@@ -48,6 +49,7 @@ export default function Faq() {
   ];
 
   return (
+    <>
     <main className="max-w-5xl mx-auto mt-12 p-6">
       <h2 className="text-4xl font-extrabold text-center mb-10  text-blue-900  bg-clip-text">
         Perguntas Frequentes
@@ -86,5 +88,7 @@ export default function Faq() {
         ))}
       </div>
     </main>
+    <Footer/>
+    </>
   );
 }
