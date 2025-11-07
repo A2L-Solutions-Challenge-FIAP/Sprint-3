@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import home from "../assets/home.svg";
 import developers from "../assets/developers.svg";
 import dashboard from "../assets/dashboard.svg";
-import settings from "../assets/settings.svg";
+import calendar from "../assets/calendar.svg";
+import notifications from "../assets/notifications.svg";
 import analytics from "../assets/analytics.svg";
+import timeline from "../assets/timeline.svg";
 import arrow from "../assets/arrow.svg";
 import sac from "../assets/sac.svg";
 import faq from "../assets/faq.svg";
@@ -15,13 +17,15 @@ interface SidebarItemsProps {
 }
 
 const menuItems = [
-  { icon: home, label: "Home", path: "/" },
-  { icon: developers, label: "Developers", path: "/developers" },
+  { icon: home, label: "Inicio", path: "/" },
   { icon: dashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: settings, label: "Settings", path: "/settings" },
-  { icon: analytics, label: "Reports", path: "/reports" },
+  { icon: calendar, label: "Consultas", path: "/medicalschedule" },
+  { icon: notifications, label: "Notificações", path: "/notification" },
+  { icon: analytics, label: "Relatórios", path: "/reports" },
+  { icon: timeline, label: "Histórico", path: "/history" },
   { icon: sac, label: "Sac", path: "/sac" },
   { icon: faq, label: "Faq", path: "/faq" },
+  { icon: developers, label: "Desenvolvedores", path: "/developers" },
 ];
 
 

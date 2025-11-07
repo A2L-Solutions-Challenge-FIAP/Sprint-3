@@ -4,10 +4,16 @@ import Root from "./root";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import Developers from "../pages/Developers";
+import MedicalSchedule from "../pages/MedicalSchedule";
+import Notification from "../pages/Notification";
+import History from "../pages/History";
+import Logs from "../pages/Logs";
+import Reports from "../pages/Reports";
+
 
 import Sac from "../pages/Sac";
 import Faq from "../pages/Faq";
-import UnderConstruction from "../pages/UnderConstrution";
+
 
 const router = createBrowserRouter([
   {
@@ -16,12 +22,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "dashboard", element: <Dashboard /> },
+      { path: "medicalschedule", element: <MedicalSchedule/> },
+      { path: "notification", element: <Notification/> },
+      { path: "reports", element: <Reports/>},
+      { path: "history", element: <History /> },
       { path: "developers", element: <Developers /> },
       { path: "sac", element: <Sac /> },
       { path: "faq", element: <Faq /> },
-      { path: "settings", element: <UnderConstruction page="Configurações" /> },
-      { path: "logs", element: <UnderConstruction page="Login" /> },
-      { path: "reports", element: <UnderConstruction page="Relatórios" /> },
+      { path: "logs", element: <Logs/>},
+      
     ],
   },
 ]);
