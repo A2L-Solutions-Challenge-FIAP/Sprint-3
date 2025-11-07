@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "./root";
+import PublicLayout from "../layouts/PublicLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
@@ -8,32 +9,30 @@ import MedicalSchedule from "../pages/MedicalSchedule";
 import Notification from "../pages/Notification";
 import History from "../pages/History";
 import Reports from "../pages/Reports";
-
-
 import Sac from "../pages/Sac";
 import Faq from "../pages/Faq";
 
-
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Root />, 
+    element: <PublicLayout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "medicalschedule", element: <MedicalSchedule/> },
-      { path: "notification", element: <Notification/> },
-      { path: "reports", element: <Reports/>},
-      { path: "history", element: <History /> },
+      { path: "/", element: <Home /> },
       { path: "developers", element: <Developers /> },
-      { path: "sac", element: <Sac /> },
       { path: "faq", element: <Faq /> },
+      { path: "sac", element: <Sac /> },
+    ],
+  },
 
-      
+  {
+    element: <DashboardLayout />,
+    children: [
+      { path: "dashboard", element: <Dashboard /> },
+      { path: "medicalschedule", element: <MedicalSchedule /> },
+      { path: "notification", element: <Notification /> },
+      { path: "reports", element: <Reports /> },
+      { path: "history", element: <History /> },
     ],
   },
 ]);
 
 export default router;
-
-
