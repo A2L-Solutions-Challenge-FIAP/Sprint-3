@@ -3,13 +3,7 @@ import Footer from "../components/Footer";
 const Home = () => {
 
   return (
-   <>
-           <button
-        onClick={() => setOpen(!open)}
-        className="md:hidden fixed top-4 right-4 z-50 bg-blue-400 text-white p-1 rounded-lg shadow-md"
-      >
-        {open ? "✖" : "☰"}
-      </button>
+  <>
 
         <main className="flex flex-col items-center text-center mt-20 px-6 max-w-3xl">
         <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
@@ -48,7 +42,7 @@ const Home = () => {
       
 
     <Footer/>
-   </>
+  </>
   
   )
 }
