@@ -1,6 +1,6 @@
 import SidebarHeader from "./SidebarHeader";
 import SidebarItems from "./SidebarItems";
-import SidebarFooter from "./SidebarFooter";
+
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"; 
 
@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [desktopOpen, setDesktopOpen] = useState(true);
   const location = useLocation();
 
-   useEffect(() => {
+  useEffect(() => {
     setOpen(false);
   }, [location]);
 
@@ -40,9 +40,6 @@ const Sidebar = () => {
         <SidebarItems open={open || desktopOpen} onItemClick={() =>{ setOpen(false); setDesktopOpen(false);} }/>
         </div> 
 
-        <div className={`${open ? "flex": "hidden"} md:flex items-center gap-3 mt-auto`}>
-          <SidebarFooter open={open || desktopOpen} onItemClick={() =>{ setOpen(false); setDesktopOpen(false);} } />
-        </div>
       </nav>
     </>
   );
