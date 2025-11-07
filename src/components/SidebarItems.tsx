@@ -4,7 +4,6 @@ import dashboard from "../assets/dashboard.svg";
 import calendar from "../assets/calendar.svg";
 import notifications from "../assets/notifications.svg";
 import analytics from "../assets/analytics.svg";
-import timeline from "../assets/timeline.svg";
 import arrow from "../assets/arrow.svg";
 
 
@@ -20,7 +19,7 @@ const menuItems = [
   { icon: calendar, label: "Consultas", path: "/medicalschedule" },
   { icon: notifications, label: "Notificações", path: "/notification" },
   { icon: analytics, label: "Relatórios", path: "/reports" },
-  { icon: timeline, label: "Histórico", path: "/history" },
+
 
 ];
 

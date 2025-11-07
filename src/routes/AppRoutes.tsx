@@ -8,7 +8,6 @@ import Developers from "../pages/Developers";
 import About from "../pages/About";
 import MedicalSchedule from "../pages/MedicalSchedule";
 import Notification from "../pages/Notification";
-import History from "../pages/History";
 import Reports from "../pages/Reports";
 import Sac from "../pages/Sac";
 import Faq from "../pages/Faq";
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
       { path: "medicalschedule", element: <MedicalSchedule /> },
       { path: "notification", element: <Notification /> },
       { path: "reports", element: <Reports /> },
-      { path: "history", element: <History /> },
     ],
   },
 ]);
