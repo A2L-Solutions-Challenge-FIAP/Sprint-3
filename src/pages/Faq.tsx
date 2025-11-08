@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Footer from "../components/Footer";
+
 
 
 export default function Faq() {
@@ -88,7 +88,7 @@ export default function Faq() {
         ))}
       </div>
     </main>
-    <Footer/>
+
     </>
   );
 }
