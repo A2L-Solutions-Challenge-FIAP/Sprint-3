@@ -1,11 +1,10 @@
 
-import Footer from "../components/Footer";
 const Home = () => {
 
   return (
   <>
 
-        <main className="flex flex-col items-center text-center mt-20 px-6 max-w-3xl">
+        <main className="flex flex-col items-center text-center px-6 max-w-3xl mx-auto mt-20 p-6">
         <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
           Gerencie lembretes com praticidade e eficiência 
         </h2>
@@ -17,7 +16,7 @@ const Home = () => {
 
       </main>
 
-      <section className="grid md:grid-cols-3 gap-6 mt-20 max-w-5xl w-full px-6">
+      <section className="grid md:grid-cols-3 gap-6  max-w-5xl w-full px-6 mx-auto mt-20 p-6">
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
           <h3 className="text-blue-800 font-semibold mb-2">📅 Redução de Faltas</h3>
           <p className="text-sm text-gray-600">
@@ -41,7 +40,6 @@ const Home = () => {
       </section>
       
 
-    <Footer/>
   </>
   
   )
