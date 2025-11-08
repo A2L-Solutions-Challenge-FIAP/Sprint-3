@@ -20,16 +20,19 @@ export default function Header() {
           </span>
         </div>
         <button
-          className="sm:hidden p-2 rounded-md text-gray-700  hover:bg-gray-100 transition "
-          aria-label="Abrir menu"
+          className="sm:hidden p-2 text-xl rounded-md text-blue-900 hover:text-blue-700  transition "
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? "✕" : "☰"}
         </button>
-        <nav className={`${
-          menuOpen ? "flex flex-col items-center absolute top-16  left-0 w-full bg-white border-t border-gray-200 py-4 shadow-md"
-          : "hidden"
-        } md:flex md:static md:flex-row md:items-center md:gap-6 text-sm text-gray-600`}>
+        <nav
+          className={`fixed inset-0 flex flex-col items-center justify-center gap-6
+          backdrop-blur-md bg-white/80 transition-all duration-300 ease-out
+          ${menuOpen ? "opacity-100 pointer-events-auto animate-fadeSlide" : "opacity-0 pointer-events-none"}
+          md:static md:flex md:flex-row md:items-center md:justify-end md:gap-6 md:backdrop-blur-0 md:bg-transparent 
+          md:opacity-100 md:pointer-events-auto`}
+        >
           <NavLink
             to="/"
             onClick={()=> setMenuOpen(false)}
@@ -41,8 +44,6 @@ export default function Header() {
           >
             Início
           </NavLink>
-
-   
 
           <NavLink
             to="/about"
@@ -92,6 +93,14 @@ export default function Header() {
           >
             Desenvolvedores
           </NavLink>
+          {menuOpen && (
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-6 right-6 text-2xl text-blue-900 hover:text-blue-700 transition md:hidden"
+              aria-label="Fechar menu"
+            >
+              ✕
+            </button>)}
         </nav>
         
         <Button
