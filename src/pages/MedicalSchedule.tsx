@@ -38,17 +38,19 @@ export default function MedicalSchedule() {
     },
   ];
 
-  return (
-    <div className="p-8 bg-gray-50 min-h-screen">
 
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-        <h1 className="text-3xl font-bold text-blue-900">Consultas</h1>
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 xl:p-10 bg-gray-50 min-h-screen">
+
+      <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">Consultas</h1>
         <div className="flex flex-col sm:flex-row gap-3 items-center w-full sm:w-auto">
 
           <input
             type="text"
             placeholder="Buscar por paciente ou especialidade..."
-            className="w-full sm:w-80 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm"
+            className=" w-full sm:w-20 lg:w-96 xl:w-[28rem] px-4 py-2 rounded-lg border border-gray-300 
+                      focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm md:text-base"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

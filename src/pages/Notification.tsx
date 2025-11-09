@@ -80,15 +80,14 @@ export default function Notification() {
 
   return (
     <div className="relative p-8 bg-gray-50 min-h-screen">
-      {/* Cabeçalho */}
+
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-        <h1 className="text-3xl font-bold text-blue-900">Notificações</h1>
+        <h1 className="text-3xl font-bold text-blue-900 mb-6">Notificações</h1>
         <Button variant="primary" onClick={() => setShowModal(true)}>
           + Adicionar Notificação
         </Button>
       </header>
 
-      {/* Cards resumo */}
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h3 className="text-sm text-gray-500">Pendentes</h3>
@@ -104,7 +103,7 @@ export default function Notification() {
         </div>
       </section>
 
-      {/* Lista de notificações */}
+  
       <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
         <h2 className="font-semibold text-blue-900 mb-4">Notificações recentes</h2>
         {notificacoes.length === 0 ? (
@@ -153,16 +152,15 @@ export default function Notification() {
         )}
       </section>
 
-      {/* Modal de nova notificação */}
+   
       {showModal && (
         <>
-          {/* Fundo acinzentado */}
+
           <div
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
             onClick={() => setShowModal(false)}
           />
 
-          {/* Formulário centralizado */}
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div className="bg-white w-full max-w-lg rounded-2xl shadow-lg p-6 relative animate-fadeIn">
               <h2 className="text-xl font-semibold text-blue-900 mb-4 text-center">
