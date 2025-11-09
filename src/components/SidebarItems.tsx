@@ -27,7 +27,7 @@ const menuItems = [
 
 export default function SidebarItems({ open, onItemClick }: SidebarItemsProps) {
   return (
-    <ul className="flex-1" >
+    <ul className="flex-1 mt-36" >
             {menuItems.map((item, index) => (
         <li key={index}
             className={item.label === "Inicio" ? "block md:hidden" : "block"}
