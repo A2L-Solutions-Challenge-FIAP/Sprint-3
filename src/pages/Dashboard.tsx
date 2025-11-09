@@ -1,38 +1,32 @@
-
-
-interface Consulta {
-  id: number;
-  paciente: string;
-  especialidade: string;
-  data: string;
-  status: "Agendada" | "Realizada" | "Não compareceu";
-}
-
-interface Notificacao {
-  id: number;
-  titulo: string;
-  dataEnvio: string;
-  status: "Pendente" | "Enviada";
-}
+import { useEffect, useState } from "react";
+import type { Consulta } from "../types/consulta";
+import type { Notificacao } from "../types/notificacao";
 
 export default function Dashboard() {
-  const consultasMock: Consulta[] = [
-    { id: 1, paciente: "Maria Oliveira", especialidade: "Psiquiatria", data: "2025-11-08T10:00", status: "Agendada" },
-    { id: 2, paciente: "Anderson Costa", especialidade: "Neurologia", data: "2025-11-05T14:00", status: "Realizada" },
-    { id: 3, paciente: "José Carlos", especialidade: "Fisiatria", data: "2025-11-06T09:00", status: "Não compareceu" },
-  ];
+  const [consultas, setConsultas] = useState<Consulta[]>([]);
+  const [notificacoes, setNotificacoes] = useState<Notificacao[]>([]);
 
-  const notificacoesMock: Notificacao[] = [
-    { id: 1, titulo: "Lembrete de consulta – Maria Oliveira", dataEnvio: "2025-11-07T09:00", status: "Enviada" },
-    { id: 2, titulo: "Lembrete de pesquisa de satisfação", dataEnvio: "2025-11-07T13:00", status: "Pendente" },
-  ];
+    useEffect(() => {
+    fetch("http://localhost:8080/consultas")
+      .then((res) => res.json())
+      .then((data) => setConsultas(data))
+      .catch((err) => console.error("Erro ao buscar consultas:", err));
+  }, []);
 
-  const consultasAgendadas = consultasMock.filter((c) => c.status === "Agendada").length;
-  const consultasRealizadas = consultasMock.filter((c) => c.status === "Realizada").length;
-  const consultasFaltas = consultasMock.filter((c) => c.status === "Não compareceu").length;
+  // Fetch das notificações
+  useEffect(() => {
+    fetch("http://localhost:8080/notificacoes")
+      .then((res) => res.json())
+      .then((data) => setNotificacoes(data))
+      .catch((err) => console.error("Erro ao buscar notificações:", err));
+  }, []);
 
-  const notificacoesEnviadas = notificacoesMock.filter((n) => n.status === "Enviada").length;
-  const notificacoesPendentes = notificacoesMock.filter((n) => n.status === "Pendente").length;
+  const consultasAgendadas = consultas.filter((c) => c.status === "AGENDADA").length;
+  const consultasRealizadas = consultas.filter((c) => c.status === "REALIZADA").length;
+  const consultasFaltas = consultas.filter((c) => c.status === "NAO_COMPARECEU").length;
+
+  const notificacoesEnviadas = notificacoes.filter((n) => n.status === "ENVIADA").length;
+  const notificacoesPendentes = notificacoes.filter((n) => n.status === "PENDENTE").length;
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
@@ -93,17 +87,17 @@ export default function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          {consultasMock.map((c) => (
+          {consultas.map((c) => (
             <tr
               key={c.id}
               className="border-t border-gray-100 hover:bg-blue-50/40 transition"
             >
               <td className="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
-                {c.paciente}
+                {c.paciente.pessoa.nome}
               </td>
-              <td className="px-3 py-2 text-gray-600">{c.especialidade}</td>
+              <td className="px-3 py-2 text-gray-600">{c.medico.especialidade}</td>
               <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
-                {new Date(c.data).toLocaleString("pt-BR", {
+                {new Date(c.dataConsulta).toLocaleString("pt-BR", {
                   dateStyle: "short",
                   timeStyle: "short",
                 })}
@@ -111,9 +105,9 @@ export default function Dashboard() {
               <td className="px-3 py-2">
                 <span
                   className={`px-2 py-1 text-[11px] sm:text-xs rounded-full font-medium ${
-                    c.status === "Realizada"
+                    c.status === "REALIZADA"
                       ? "bg-green-100 text-green-700"
-                      : c.status === "Não compareceu"
+                      : c.status === "NAO_COMPARECEU"
                       ? "bg-red-100 text-red-700"
                       : "bg-blue-100 text-blue-700"
                   }`}
@@ -142,13 +136,13 @@ export default function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          {notificacoesMock.map((n) => (
+          {notificacoes.map((n) => (
             <tr
               key={n.id}
               className="border-t border-gray-100 hover:bg-blue-50/40 transition"
             >
               <td className="px-3 py-2 font-medium text-gray-800">
-                {n.titulo}
+                {n.lembrete.mensagem}
               </td>
               <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
                 {new Date(n.dataEnvio).toLocaleString("pt-BR", {
@@ -159,7 +153,7 @@ export default function Dashboard() {
               <td className="px-3 py-2">
                 <span
                   className={`px-2 py-1 text-[11px] sm:text-xs rounded-full font-medium ${
-                    n.status === "Enviada"
+                    n.status === "ENVIADA"
                       ? "bg-green-100 text-green-700"
                       : "bg-blue-100 text-blue-700"
                   }`}
