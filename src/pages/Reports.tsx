@@ -72,6 +72,8 @@ export default function Reports() {
         </p>
       </header>
 
+      
+
       <section className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h3 className="text-sm text-gray-500">Consultas (Semana)</h3>
