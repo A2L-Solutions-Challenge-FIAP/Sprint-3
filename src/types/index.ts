@@ -6,3 +6,5 @@ export * from "./paciente";
 export * from "./medico";
 export * from "./consulta";
 export * from "./enums";
+export * from "./relatorio";
+

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Consulta } from "../types/consulta";
 import type { Notificacao } from "../types/notificacao";
 
+
 export default function Dashboard() {
   const [consultas, setConsultas] = useState<Consulta[]>([]);
   const [notificacoes, setNotificacoes] = useState<Notificacao[]>([]);
@@ -157,10 +158,9 @@ export default function Dashboard() {
                   className="border-t border-gray-100 hover:bg-blue-50/40 transition"
                 >
                   <td className="px-3 py-2 font-medium text-gray-800">
-                    {n.lembrete.mensagem}
                   </td>
                   <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
-                    {new Date(n.dataEnvio).toLocaleString("pt-BR", {
+                    {new Date(n.dataHora).toLocaleString("pt-BR", {
                       dateStyle: "short",
                       timeStyle: "short",
                     })}

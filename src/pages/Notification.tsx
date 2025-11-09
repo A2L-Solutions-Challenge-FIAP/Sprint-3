@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../components/Button";
 
 interface Notificacao {
@@ -16,27 +16,8 @@ const agoraMais1h = () =>
   new Date(Date.now() + 60 * 60 * 1000).toISOString().slice(0, 16);
 
 export default function Notification() {
-  const [notificacoes, setNotificacoes] = useState<Notificacao[]>([
-    {
-      id: uid(),
-      paciente: "Maria Oliveira",
-      medico: "Dra. Camila Torres",
-      especialidade: "Psiquiatria",
-      dataHora: "2025-11-08T10:00",
-      canal: "WhatsApp",
-      enviada: false,
-    },
-    {
-      id: uid(),
-      paciente: "José Carlos",
-      medico: "Dr. João Silva",
-      especialidade: "Neurologia",
-      dataHora: "2025-11-07T15:00",
-      canal: "E-mail",
-      enviada: true,
-    },
-  ]);
-
+  const [notificacoes, setNotificacoes] = useState<Notificacao[]>([]);
+  
   const [showModal, setShowModal] = useState(false);
   const [paciente, setPaciente] = useState("");
   const [medico, setMedico] = useState("");
@@ -47,6 +28,20 @@ export default function Notification() {
   const total = notificacoes.length;
   const enviadas = notificacoes.filter((n) => n.enviada).length;
   const pendentes = total - enviadas;
+
+  useEffect(() => {
+  async function fetchNotificacoes() {
+    try {
+      const res = await fetch("http://localhost:8080/notificacoes");
+      const data = await res.json();
+      setNotificacoes(data);
+    } catch (error) {
+      console.error("Erro ao buscar notificações:", error);
+    }
+  }
+
+  fetchNotificacoes();
+}, []);
 
   function adicionar(e: React.FormEvent) {
     e.preventDefault();
