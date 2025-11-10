@@ -1,11 +1,13 @@
-import type { StatusLembrete, CanalLembrete } from "./enums";
-import type { Consulta } from "./consulta";
-
 export interface Lembrete {
   id: number;
   mensagem: string;
-  dataEnvio: string; 
-  status: StatusLembrete;
-  canal: CanalLembrete;
-  consulta: Consulta;
+  dataEnvio: string;
+  statusLembrete: "PENDENTE" | "ENVIADO" | "CONFIRMADO" | "FALHOU";
+  canal: "SMS" | "WHATSAPP" | "EMAIL";
+  nomePaciente: string;
+  cnsPaciente: string;
+  nomeMedico: string;
+  crmMedico: string;
+  especialidade: string;
+  tipoConsulta: string;
 }

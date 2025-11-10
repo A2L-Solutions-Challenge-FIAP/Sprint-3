@@ -1,12 +1,4 @@
-export interface RelatorioPaciente {
-  nome: string;
-  total: number;
-  realizadas: number;
-  canceladas: number;
-  naoCompareceu: number;
-}
-
-export interface RelatorioEspecialidadeItem {
+export interface RelatorioEspecialidade {
   nome: string;
   consultas: number;
   confirmadas: number;
@@ -14,8 +6,8 @@ export interface RelatorioEspecialidadeItem {
   canceladas: number;
 }
 
-export interface RelatorioEspecialidade {
+export interface RelatorioSemanal {
   nome: string;
-  atual: RelatorioEspecialidadeItem;
-  anterior: RelatorioEspecialidadeItem;
+  atual: RelatorioEspecialidade;
+  anterior: RelatorioEspecialidade;
 }

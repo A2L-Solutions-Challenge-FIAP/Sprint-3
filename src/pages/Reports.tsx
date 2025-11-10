@@ -1,58 +1,45 @@
 import { useState, useEffect } from "react";
-
-interface Especialidade {
-  nome: string;
-  atual: {
-    consultas: number;
-    confirmadas: number;
-    realizadas: number;
-    canceladas: number;
-  };
-  anterior: {
-    consultas: number;
-    confirmadas: number;
-    realizadas: number;
-    canceladas: number;
-  };
-}
+import type { RelatorioSemanal } from "../types/relatorio";
 
 export default function Reports() {
-  const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
+  const [relatorios, setRelatorios] = useState<RelatorioSemanal[]>([]);
 
   useEffect(() => {
-    async function fetchRelatorio() {
+    async function fetchRelatorios() {
       try {
-        const res = await fetch("http://localhost:8080/relatorios/especialidades");
+        const res = await fetch("http://localhost:8080/relatorios/semanal");
         const data = await res.json();
-        setEspecialidades(data);
+        setRelatorios(data);
       } catch (err) {
         console.error("Erro ao buscar relatório semanal:", err);
       }
     }
 
-    fetchRelatorio();
+    fetchRelatorios();
   }, []);
 
+  // 🔹 Cálculos agregados
+  const totalAtual = relatorios.reduce((acc, e) => acc + (e.atual?.consultas || 0), 0);
+  const totalAnterior = relatorios.reduce((acc, e) => acc + (e.anterior?.consultas || 0), 0);
+  const confirmadasAtual = relatorios.reduce((acc, e) => acc + (e.atual?.confirmadas || 0), 0);
+  const confirmadasAnterior = relatorios.reduce((acc, e) => acc + (e.anterior?.confirmadas || 0), 0);
+  const realizadasAtual = relatorios.reduce((acc, e) => acc + (e.atual?.realizadas || 0), 0);
+  const realizadasAnterior = relatorios.reduce((acc, e) => acc + (e.anterior?.realizadas || 0), 0);
+  const canceladasAtual = relatorios.reduce((acc, e) => acc + (e.atual?.canceladas || 0), 0);
+  const canceladasAnterior = relatorios.reduce((acc, e) => acc + (e.anterior?.canceladas || 0), 0);
 
-  const totalAtual = especialidades.reduce((acc, e) => acc + e.atual.consultas, 0);
-  const totalAnterior = especialidades.reduce((acc, e) => acc + e.anterior.consultas, 0);
-  const confirmadasAtual = especialidades.reduce((acc, e) => acc + e.atual.confirmadas, 0);
-  const confirmadasAnterior = especialidades.reduce((acc, e) => acc + e.anterior.confirmadas, 0);
-  const realizadasAtual = especialidades.reduce((acc, e) => acc + e.atual.realizadas, 0);
-  const realizadasAnterior = especialidades.reduce((acc, e) => acc + e.anterior.realizadas, 0);
-  const canceladasAtual = especialidades.reduce((acc, e) => acc + e.atual.canceladas, 0);
-  const canceladasAnterior = especialidades.reduce((acc, e) => acc + e.anterior.canceladas, 0);
+  // 🔹 Métricas derivadas
+  const variacao = ((totalAtual - totalAnterior) / (totalAnterior || 1)) * 100;
+  const taxaConfirmacao = ((confirmadasAtual / (totalAtual || 1)) * 100).toFixed(1);
+  const taxaCancelamento = ((canceladasAtual / (totalAtual || 1)) * 100).toFixed(1);
+  const taxaResposta = ((realizadasAtual / (confirmadasAtual || 1)) * 100).toFixed(1);
 
-  const variacao = ((totalAtual - totalAnterior) / totalAnterior) * 100;
-  const taxaConfirmacao = ((confirmadasAtual / totalAtual) * 100).toFixed(1);
-  const taxaCancelamento = ((canceladasAtual / totalAtual) * 100).toFixed(1);
-  const taxaResposta = ((realizadasAtual / confirmadasAtual) * 100).toFixed(1);
-
+  // 🔹 Funções auxiliares
   const arrow = (value: number) =>
     value > 0 ? "text-green-600" : value < 0 ? "text-red-600" : "text-gray-500";
 
   const formatDiff = (current: number, previous: number) => {
-    const diff = ((current - previous) / previous) * 100;
+    const diff = ((current - previous) / (previous || 1)) * 100;
     return (
       <span className={`text-xs font-semibold ${arrow(diff)}`}>
         {diff > 0 ? `↑ ${diff.toFixed(1)}%` : diff < 0 ? `↓ ${Math.abs(diff).toFixed(1)}%` : "—"}
@@ -62,7 +49,6 @@ export default function Reports() {
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
-
       <header className="mb-10">
         <h1 className="text-3xl font-bold text-blue-900 mb-2">
           Relatório Semanal de Consultas
@@ -72,8 +58,7 @@ export default function Reports() {
         </p>
       </header>
 
-      
-
+      {/* 🔹 Cards de resumo geral */}
       <section className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h3 className="text-sm text-gray-500">Consultas (Semana)</h3>
@@ -105,6 +90,7 @@ export default function Reports() {
         </div>
       </section>
 
+      {/* 🔹 Métricas adicionais */}
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
         <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
           <h3 className="text-sm text-gray-500">Taxa de Cancelamento</h3>
@@ -116,6 +102,7 @@ export default function Reports() {
         </div>
       </section>
 
+      {/* 🔹 Tabela de especialidades */}
       <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mb-8">
         <h2 className="font-semibold text-blue-900 mb-4">
           Consultas por Especialidade — Semana Atual vs. Anterior
@@ -134,9 +121,9 @@ export default function Reports() {
               </tr>
             </thead>
             <tbody>
-              {especialidades.map((e, i) => {
-                const taxaConf = ((e.atual.confirmadas / e.atual.consultas) * 100).toFixed(1);
-                const taxaCanc = ((e.atual.canceladas / e.atual.consultas) * 100).toFixed(1);
+              {relatorios.map((e, i) => {
+                const taxaConf = ((e.atual.confirmadas / (e.atual.consultas || 1)) * 100).toFixed(1);
+                const taxaCanc = ((e.atual.canceladas / (e.atual.consultas || 1)) * 100).toFixed(1);
                 return (
                   <tr
                     key={i}
@@ -156,6 +143,7 @@ export default function Reports() {
         </div>
       </section>
 
+      {/* 🔹 Análise textual */}
       <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
         <h2 className="font-semibold text-blue-900 mb-4">Análise Resumida</h2>
         <p className="text-gray-600 text-sm leading-relaxed">

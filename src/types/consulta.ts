@@ -1,12 +1,6 @@
-import type { Paciente } from "./paciente";
-import type { Medico } from "./medico";
-import type { StatusConsulta, TipoConsulta } from "./enums";
-
 export interface Consulta {
-  id: number;
+  nomePaciente: string;
+  nomeMedico: string;
+  especialidade: string;
   dataConsulta: string; 
-  tipoConsulta: TipoConsulta;
-  status: StatusConsulta;
-  paciente: Paciente;
-  medico: Medico;
 }

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Consulta } from "../types/consulta";
-import type { Notificacao } from "../types/notificacao";
-
+import type { Lembrete } from "../types/lembrete";
 
 export default function Dashboard() {
   const [consultas, setConsultas] = useState<Consulta[]>([]);
-  const [notificacoes, setNotificacoes] = useState<Notificacao[]>([]);
+  const [lembretes, setLembretes] = useState<Lembrete[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/consultas")
@@ -15,27 +14,20 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/notificacoes")
+    fetch("http://localhost:8080/lembretes")
       .then((res) => res.json())
-      .then((data) => setNotificacoes(data))
-      .catch((err) => console.error("Erro ao buscar notificações:", err));
+      .then((data) => setLembretes(data))
+      .catch((err) => console.error("Erro ao buscar lembretes:", err));
   }, []);
 
-  const consultasAgendadas = consultas.filter(
-    (c) => c.status === "AGENDADA"
-  ).length;
-  const consultasRealizadas = consultas.filter(
-    (c) => c.status === "REALIZADA"
-  ).length;
-  const consultasFaltas = consultas.filter(
-    (c) => c.status === "NAO_COMPARECEU"
+  const consultasTotais = consultas.length;
+
+  const lembretesEnviados = lembretes.filter(
+    (l) => l.statusLembrete === "ENVIADO"
   ).length;
 
-  const notificacoesEnviadas = notificacoes.filter(
-    (n) => n.status === "ENVIADA"
-  ).length;
-  const notificacoesPendentes = notificacoes.filter(
-    (n) => n.status === "PENDENTE"
+  const lembretesPendentes = lembretes.filter(
+    (l) => l.statusLembrete === "PENDENTE"
   ).length;
 
   return (
@@ -45,48 +37,37 @@ export default function Dashboard() {
           Visão Geral
         </h1>
         <p className="text-gray-500 text-sm sm:text-base lg:text-lg">
-          Acompanhe o resumo de consultas e notificações do sistema
+          Acompanhe o resumo de consultas e lembretes do sistema
         </p>
       </header>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-sm text-gray-500">Consultas agendadas</h3>
-          <p className="text-2xl sm:text-3xl font-bold text-blue-700 mt-1">
-            {consultasAgendadas}
-          </p>
-        </div>
-        <div className="bg-white p-4  sm:p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-sm text-gray-500">Consultas realizadas</h3>
-          <p className="text-2xl sm:text-3xl font-bold text-green-700 mt-1">
-            {consultasRealizadas}
-          </p>
-        </div>
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-sm text-gray-500">Faltas</h3>
-          <p className="text-2xl sm:text-3xl font-bold text-red-700 mt-1">
-            {consultasFaltas}
-          </p>
-        </div>
-      </section>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10">
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-sm text-gray-500">Notificações enviadas</h3>
-          <p className="text-2xl sm:text-3xl font-bold text-green-700 mt-1">
-            {notificacoesEnviadas}
+          <h3 className="text-sm text-gray-500">Total de Consultas</h3>
+          <p className="text-2xl sm:text-3xl font-bold text-blue-700 mt-1">
+            {consultasTotais}
           </p>
         </div>
 
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-sm text-gray-500">Notificações pendentes</h3>
-          <p className="text-2xl sm:text-3xl font-bold text-blue-700 mt-1">
-            {notificacoesPendentes}
+          <h3 className="text-sm text-gray-500">Lembretes Enviados</h3>
+          <p className="text-2xl sm:text-3xl font-bold text-green-700 mt-1">
+            {lembretesEnviados}
+          </p>
+        </div>
+
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-sm text-gray-500">Lembretes Pendentes</h3>
+          <p className="text-2xl sm:text-3xl font-bold text-amber-600 mt-1">
+            {lembretesPendentes}
           </p>
         </div>
       </section>
+
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
+
         <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 shadow-sm overflow-x-auto">
           <h2 className="text-base sm:text-lg font-semibold text-blue-900 mb-4">
             Consultas Recentes
@@ -96,41 +77,31 @@ export default function Dashboard() {
             <thead className="bg-blue-50 text-blue-900 uppercase text-[10px] sm:text-xs tracking-wider">
               <tr>
                 <th className="px-3 py-2 text-left">Paciente</th>
+                <th className="px-3 py-2 text-left">Médico</th>
                 <th className="px-3 py-2 text-left">Especialidade</th>
                 <th className="px-3 py-2 text-left">Data</th>
-                <th className="px-3 py-2 text-left">Status</th>
               </tr>
             </thead>
             <tbody>
-              {consultas.map((c) => (
+              {consultas.map((c, i) => (
                 <tr
-                  key={c.id}
+                  key={i}
                   className="border-t border-gray-100 hover:bg-blue-50/40 transition"
                 >
                   <td className="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
-                    {c.paciente.pessoa.nome}
+                    {c.nomePaciente}
                   </td>
                   <td className="px-3 py-2 text-gray-600">
-                    {c.medico.especialidade}
+                    {c.nomeMedico}
+                  </td>
+                  <td className="px-3 py-2 text-gray-600">
+                    {c.especialidade}
                   </td>
                   <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
                     {new Date(c.dataConsulta).toLocaleString("pt-BR", {
                       dateStyle: "short",
                       timeStyle: "short",
                     })}
-                  </td>
-                  <td className="px-3 py-2">
-                    <span
-                      className={`px-2 py-1 text-[11px] sm:text-xs rounded-full font-medium ${
-                        c.status === "REALIZADA"
-                          ? "bg-green-100 text-green-700"
-                          : c.status === "NAO_COMPARECEU"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-blue-100 text-blue-700"
-                      }`}
-                    >
-                      {c.status}
-                    </span>
                   </td>
                 </tr>
               ))}
@@ -140,27 +111,30 @@ export default function Dashboard() {
 
         <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 shadow-sm overflow-x-auto">
           <h2 className="text-base sm:text-lg font-semibold text-blue-900 mb-4">
-            Últimas Notificações
+            Últimos Lembretes
           </h2>
 
           <table className="min-w-full text-xs sm:text-sm">
             <thead className="bg-blue-50 text-blue-900 uppercase text-[10px] sm:text-xs tracking-wider">
               <tr>
-                <th className="px-3 py-2 text-left">Título</th>
-                <th className="px-3 py-2 text-left">Data</th>
+                <th className="px-3 py-2 text-left">Paciente</th>
+                <th className="px-3 py-2 text-left">Canal</th>
+                <th className="px-3 py-2 text-left">Data de Envio</th>
                 <th className="px-3 py-2 text-left">Status</th>
               </tr>
             </thead>
             <tbody>
-              {notificacoes.map((n) => (
+              {lembretes.map((l) => (
                 <tr
-                  key={n.id}
+                  key={l.id}
                   className="border-t border-gray-100 hover:bg-blue-50/40 transition"
                 >
                   <td className="px-3 py-2 font-medium text-gray-800">
+                    {l.nomePaciente}
                   </td>
+                  <td className="px-3 py-2 text-gray-600">{l.canal}</td>
                   <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
-                    {new Date(n.dataHora).toLocaleString("pt-BR", {
+                    {new Date(l.dataEnvio).toLocaleString("pt-BR", {
                       dateStyle: "short",
                       timeStyle: "short",
                     })}
@@ -168,12 +142,14 @@ export default function Dashboard() {
                   <td className="px-3 py-2">
                     <span
                       className={`px-2 py-1 text-[11px] sm:text-xs rounded-full font-medium ${
-                        n.status === "ENVIADA"
+                        l.statusLembrete === "ENVIADO"
                           ? "bg-green-100 text-green-700"
-                          : "bg-blue-100 text-blue-700"
+                          : l.statusLembrete === "PENDENTE"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-gray-100 text-gray-700"
                       }`}
                     >
-                      {n.status}
+                      {l.statusLembrete}
                     </span>
                   </td>
                 </tr>
