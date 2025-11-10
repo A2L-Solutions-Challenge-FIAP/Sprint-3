@@ -1,20 +1,38 @@
 import github from "../assets/github.png";
 import linkedIn from "../assets/linkedIn.png";
 import ana from "../assets/ana.png";
-
-
+import gui from "../assets/gui.png";
+import avatar from "../assets/avatar.png";
 
 const Developers = () => {
   const integrantes = [
-  {
-    nome: "Ana Flavia de Freitas",
-    rm: "565559",
-    turma: "1TDSPK",
-    linkedin: "https://www.linkedin.com/in/ana-fl%C3%A1via-de-freitas/",
-    github: "https://github.com/anafreitas-br",
-    foto: ana,
-  },
-];
+    {
+      nome: "Ana Flavia de Freitas",
+      rm: "565559",
+      turma: "1TDSPK",
+      linkedin: "https://www.linkedin.com/in/ana-fl%C3%A1via-de-freitas/",
+      github: "https://github.com/anafreitas-br",
+      foto: ana,
+    },
+    {
+      nome: "Luis Guilherme Borges Silva",
+      rm: "566548",
+      turma: "1TDSPK",
+      linkedin: "https://www.linkedin.com/in/luis130505/",
+      github: "https://github.com/LuisGdev13",
+      foto: gui,
+
+    },
+    {
+      nome: "Gabriel Garcia",
+      rm: "563298",
+      turma: "1TDSPK",
+      linkedin: "https://www.linkedin.com/in/gabriel-garcia-7b9675234/",
+      github: "https://github.com/Gabriel-hub-prog22",
+      foto: avatar,
+
+    },
+  ];
   return (
     <main className="max-w-4xl mx-auto p-6">
       <h2 className="text-3xl font-extrabold text-center text-blue-800 mb-10">
@@ -43,18 +61,17 @@ const Developers = () => {
               </p>
 
               <div className="flex justify-center sm:justify-start gap-4 mt-4">
-
                 <a
                   href={dev.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition"
                 >
-                    <img
-              src={linkedIn}
-              alt="LinkedIn"
-              className="w-8 h-8 hover:opacity-80 transition"
-            />
+                  <img
+                    src={linkedIn}
+                    alt="LinkedIn"
+                    className="w-8 h-8 hover:opacity-80 transition"
+                  />
                 </a>
                 <a
                   href={dev.github}
@@ -63,10 +80,10 @@ const Developers = () => {
                   className="flex items-center gap-2 text-gray-800 hover:text-black transition"
                 >
                   <img
-              src={github}
-              alt="GitHub"
-              className="w-8 h-8 hover:opacity-80 transition"
-            />
+                    src={github}
+                    alt="GitHub"
+                    className="w-8 h-8 hover:opacity-80 transition"
+                  />
                 </a>
               </div>
             </article>

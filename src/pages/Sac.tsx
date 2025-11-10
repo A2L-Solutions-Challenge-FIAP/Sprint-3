@@ -4,33 +4,29 @@ import { useState } from "react";
 import Button from "../components/Button";
 import { schema, type FormData, type Props } from "../types";
 
-
-
-
-
 const Sac = ({ buttonText }: Props) => {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const [messageSucessful, setMessageSucessful] = useState(false);
 
-async function enviarFormulario(data: FormData) {
-  console.log("formulário enviado!", data);
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  
-  setMessageSucessful(true);     
-  reset();                       
+  async function enviarFormulario(data: FormData) {
+    console.log("formulário enviado!", data);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  setTimeout(() => {
-    setMessageSucessful(false);  
-  }, 5000);
-}
+    setMessageSucessful(true);
+    reset();
+
+    setTimeout(() => {
+      setMessageSucessful(false);
+    }, 5000);
+  }
   return (
     <section className="max-w-2xl mx-auto mt-12 p-8 bg-white shadow-lg rounded-2xl border border-gray-100">
       <h2 className="text-3xl font-extrabold text-center mb-6  bg-clip-text text-blue-900">
@@ -92,7 +88,8 @@ async function enviarFormulario(data: FormData) {
         </div>
 
         <div className="flex flex-col md:flex-row justify-end gap-4 pt-4">
-          <Button variant="secondary"
+          <Button
+            variant="secondary"
             type="button"
             onClick={() => reset()}
             className="px-5 py-2 "
@@ -100,7 +97,8 @@ async function enviarFormulario(data: FormData) {
             Limpar
           </Button>
 
-          <Button variant="primary"
+          <Button
+            variant="primary"
             type="submit"
             disabled={isSubmitting}
             className="px-5 py-2 rounded-lg text-white"

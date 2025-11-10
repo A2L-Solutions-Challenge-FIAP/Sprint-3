@@ -41,7 +41,6 @@ export default function Dashboard() {
         </p>
       </header>
 
-
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10">
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
           <h3 className="text-sm text-gray-500">Total de Consultas</h3>
@@ -65,9 +64,7 @@ export default function Dashboard() {
         </div>
       </section>
 
-
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
-
         <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 shadow-sm overflow-x-auto">
           <h2 className="text-base sm:text-lg font-semibold text-blue-900 mb-4">
             Consultas Recentes
@@ -91,12 +88,8 @@ export default function Dashboard() {
                   <td className="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
                     {c.nomePaciente}
                   </td>
-                  <td className="px-3 py-2 text-gray-600">
-                    {c.nomeMedico}
-                  </td>
-                  <td className="px-3 py-2 text-gray-600">
-                    {c.especialidade}
-                  </td>
+                  <td className="px-3 py-2 text-gray-600">{c.nomeMedico}</td>
+                  <td className="px-3 py-2 text-gray-600">{c.especialidade}</td>
                   <td className="px-3 py-2 text-gray-600 whitespace-nowrap">
                     {new Date(c.dataConsulta).toLocaleString("pt-BR", {
                       dateStyle: "short",

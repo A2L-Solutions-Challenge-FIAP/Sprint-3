@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-
-
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -50,45 +48,44 @@ export default function Faq() {
 
   return (
     <>
-    <main className="max-w-5xl mx-auto mt-12 p-6">
-      <h2 className="text-4xl font-extrabold text-center mb-10  text-blue-900  bg-clip-text">
-        Perguntas Frequentes
-      </h2>
+      <main className="max-w-5xl mx-auto mt-12 p-6">
+        <h2 className="text-4xl font-extrabold text-center mb-10  text-blue-900  bg-clip-text">
+          Perguntas Frequentes
+        </h2>
 
-      <div className="flex flex-col gap-6">
-        {perguntas.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
-          >
-            <button
-              onClick={() => toggleQuestion(index)}
-              className="w-full text-left text-lg font-semibold text-purple-900 flex justify-between items-center"
-            >
-              <span>{item.pergunta}</span>
-              <div
-                className={`h-5 w-5 transform transition-transform duration-300 ${
-                  openIndex === index
-                    ? "rotate-180 text-orange-600"
-                    : "rotate-0"
-                }`}
-              />
-            </button>
-
+        <div className="flex flex-col gap-6">
+          {perguntas.map((item, index) => (
             <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                openIndex === index ? "max-h-screen mt-3" : "max-h-0"
-              }`}
+              key={index}
+              className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
             >
-              <p className="text-gray-700 bg-gray-50 rounded-md p-4 text-sm leading-relaxed whitespace-pre-line">
-                {item.resposta}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </main>
+              <button
+                onClick={() => toggleQuestion(index)}
+                className="w-full text-left text-lg font-semibold text-purple-900 flex justify-between items-center"
+              >
+                <span>{item.pergunta}</span>
+                <div
+                  className={`h-5 w-5 transform transition-transform duration-300 ${
+                    openIndex === index
+                      ? "rotate-180 text-orange-600"
+                      : "rotate-0"
+                  }`}
+                />
+              </button>
 
+              <div
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index ? "max-h-screen mt-3" : "max-h-0"
+                }`}
+              >
+                <p className="text-gray-700 bg-gray-50 rounded-md p-4 text-sm leading-relaxed whitespace-pre-line">
+                  {item.resposta}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
     </>
   );
 }

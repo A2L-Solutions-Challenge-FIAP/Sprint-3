@@ -24,22 +24,13 @@ A interface do sistema foi desenvolvida com foco em **usabilidade, clareza e res
 
 ## 👥 Integrantes
 
-| Nome        | RM     | Curso / Turma                               |
-|-------------|--------|---------------------------------------------|
-| Ana Freitas | 565559 | Análise e Desenvolvimento de Sistemas - FIAP |
+| Nome           | RM     | Curso / Turma                                |
+|----------------|--------|----------------------------------------------|
+| Ana Freitas    | 565559 | Análise e Desenvolvimento de Sistemas - FIAP |
+| Luis Borges    | 566548 | Análise e Desenvolvimento de Sistemas - FIAP |
+| Gabriel Garcia | 563298 | Análise e Desenvolvimento de Sistemas - FIAP |
 
 ---
-
-## 🖼️ Imagens & Ícones do Projeto
-
-**Layout das páginas**  
-![Home](./src/assets/homePrint.png)
-![Developer](./src/assets/developerPrint.png)
-![Dashboard](./src/assets/dashboardPrint.png)
-![Settings](./src/assets/settingPrint.png)
-![Reports](./src/assets/reportPrint.png)
-![Sac](./src/assets/sacPrint.png)
-![Faq](./src/assets/faqPrint.png)
 
 
 **Ícones utilizados:**  
@@ -145,9 +136,6 @@ npm run dev
 
 - [📂 Repositório GitHub](https://github.com/A2L-Solutions-Challenge-FIAP/Sprint-4.git)
 - [📹 Vídeo de Demonstração (YouTube)](https://youtube.com/meuvideo)
+- [ Deploy Vercel](https://sprint-4-git-main-anafreitasbrs-projects.vercel.app/)
 
-## Observações finais
 
-- As páginas Settings, Login e Reports ainda estão em construção.
-- O projeto pode ser expandido com autenticação real e integração com banco de dados no futuro.
-- Totalmente responsivo e adaptado para uso em desktop e mobile.

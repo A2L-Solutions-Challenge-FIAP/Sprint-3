@@ -9,7 +9,7 @@ export default function PublicLayout() {
       <main className=" flex-1 pt-8">
         <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

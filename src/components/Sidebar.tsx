@@ -28,7 +28,11 @@ const Sidebar = () => {
         className={`
           fixed top-0 left-0 h-screen bg-blue-energy text-white flex flex-col 
           duration-300
-          ${open ? "  w-full h-full p-6 z-40 justify-center items-center gap-6 " : "hidden"}
+          ${
+            open
+              ? "  w-full h-full p-6 z-40 justify-center items-center gap-6 "
+              : "hidden"
+          }
           md:relative md:flex md:flex-col md:h-auto md:p-4 md:justify-start m:items-stretch 
           ${desktopOpen ? "md:w-70" : "md:w-20"}
         `}

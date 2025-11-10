@@ -27,8 +27,12 @@ export default function Notification() {
   const [canal, setCanal] = useState<"SMS" | "WHATSAPP" | "EMAIL">("EMAIL");
 
   const total = lembretes.length;
-  const enviados = lembretes.filter((n) => n.statusLembrete === "ENVIADO").length;
-  const pendentes = lembretes.filter((n) => n.statusLembrete === "PENDENTE").length;
+  const enviados = lembretes.filter(
+    (n) => n.statusLembrete === "ENVIADO"
+  ).length;
+  const pendentes = lembretes.filter(
+    (n) => n.statusLembrete === "PENDENTE"
+  ).length;
 
   useEffect(() => {
     async function fetchLembretes() {
@@ -109,9 +113,7 @@ export default function Notification() {
 
       {/* 🔹 Lista de lembretes */}
       <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-        <h2 className="font-semibold text-blue-900 mb-4">
-          Lembretes Recentes
-        </h2>
+        <h2 className="font-semibold text-blue-900 mb-4">Lembretes Recentes</h2>
         {lembretes.length === 0 ? (
           <p className="text-gray-500 text-sm">
             Nenhum lembrete cadastrado ainda.

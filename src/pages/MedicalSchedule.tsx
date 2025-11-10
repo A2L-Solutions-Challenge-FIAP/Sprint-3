@@ -22,7 +22,9 @@ export default function MedicalSchedule() {
   return (
     <div className="p-4 sm:p-6 lg:p-8 xl:p-10 bg-gray-50 min-h-screen">
       <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">Consultas</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
+          Consultas
+        </h1>
         <div className="relative w-full sm:w-20 lg:w-96 xl:w-[28rem]">
           <input
             type="text"
@@ -52,8 +54,13 @@ export default function MedicalSchedule() {
           </thead>
           <tbody>
             {consultasFiltradas.map((c, i) => (
-              <tr key={i} className="hover:bg-blue-50/40 border-t border-gray-100 transition-colors">
-                <td className="px-4 py-3 font-medium text-gray-800">{c.nomePaciente}</td>
+              <tr
+                key={i}
+                className="hover:bg-blue-50/40 border-t border-gray-100 transition-colors"
+              >
+                <td className="px-4 py-3 font-medium text-gray-800">
+                  {c.nomePaciente}
+                </td>
                 <td className="px-4 py-3 text-gray-600">{c.nomeMedico}</td>
                 <td className="px-4 py-3 text-gray-600">{c.especialidade}</td>
                 <td className="px-4 py-3 text-gray-600">
